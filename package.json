@@ -1,0 +1,11 @@
+{
+  "name": "pwa",
+  "version": "1.0.0",
+  "description": "base para una web pwa",
+  "main": "sw.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Carlos Garcia",
+  "license": "ISC"
+}
