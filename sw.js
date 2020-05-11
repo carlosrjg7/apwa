@@ -1,5 +1,10 @@
-const STATIC_CACHE    = 'static-v2';
-const DYNAMIC_CACHE   = 'dynamic-v2';
+importScripts('js/sw-utils.js');
+/* importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
+ */
+
+const STATIC_CACHE    = 'static-v2.1';
+const DYNAMIC_CACHE   = 'dynamic-v2.1';
 //const INMUTABLE_CACHE = 'inmutable-v1';
 
 const APP_SHELL = [
@@ -8,6 +13,14 @@ const APP_SHELL = [
     'css/styles.css',
     'js/index.js'
 ];
+
+/* 
+firebase.initializeApp({
+    messagingSenderId: "your messagingSenderId again"
+});
+
+const messaging = firebase.messaging();
+ */
 
 
 self.addEventListener('install', e =>{

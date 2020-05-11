@@ -1,8 +1,14 @@
+//import {initializeFirebase} from './push-notification.js';
+
 
 var url = window.location.href;
 var swLocation = '/apwa/sw.js';
 
 
+/* $( document ).ready(function() {
+    console.log( "ready!" );
+});
+ */
 
 if(navigator.serviceWorker){
 
@@ -10,6 +16,13 @@ if(navigator.serviceWorker){
         swLocation = '/sw.js';
     }
 
-    navigator.serviceWorker.register(swLocation);
+    navigator.serviceWorker.register(swLocation)
+        .then(reg => {
+            console.log(reg);
+          //  firebase.messaging().useServiceWorker(reg);
+        });
 
 }
+
+//initializeFirebase();
+
