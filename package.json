@@ -4,10 +4,12 @@
   "description": "base para una web pwa",
   "main": "sw.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d public"
   },
   "author": "Carlos Garcia",
   "license": "ISC",
+  "homepage": "https://carlosrjg7.github.io/apwa",
   "dependencies": {
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
@@ -24,6 +26,7 @@
     "@babel/polyfill": "^7.8.7",
     "babelify": "^10.0.0",
     "browserify": "^16.5.1",
+    "gh-pages": "^2.2.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-uglify": "^3.0.2",
     "vinyl-buffer": "^1.0.1",
