@@ -1,26 +1,18 @@
-importScripts('js/sw-utils.js');
-/* importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
+//importScripts('js/sw-utils.js');
+importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js');
 importScripts('https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js');
- */
 
-const STATIC_CACHE    = 'static-v2.1';
-const DYNAMIC_CACHE   = 'dynamic-v2.1';
+
+const STATIC_CACHE    = 'static-v2.2';
+const DYNAMIC_CACHE   = 'dynamic-v2.2';
 //const INMUTABLE_CACHE = 'inmutable-v1';
 
 const APP_SHELL = [
-   // '/',
+    '/',
     'index.html',
     'css/styles.css',
     'js/index.js'
 ];
-
-/* 
-firebase.initializeApp({
-    messagingSenderId: "your messagingSenderId again"
-});
-
-const messaging = firebase.messaging();
- */
 
 
 self.addEventListener('install', e =>{
@@ -88,3 +80,19 @@ function actualizarCache(cacheName, req){
 
     });
 };
+
+
+
+firebase.initializeApp({
+    apiKey: "AIzaSyAwWArnTnyHGSrGBr3Oby7WwS8oflag784",
+    authDomain: "pwat-d6956.firebaseapp.com",
+    databaseURL: "https://pwat-d6956.firebaseio.com",
+    projectId: "pwat-d6956",
+    storageBucket: "pwat-d6956.appspot.com",
+    messagingSenderId: "956765347113",
+    appId: "1:956765347113:web:62fd0e94d89345812dab38",
+    measurementId: "G-R3CJPXBC55"
+});
+
+const messaging = firebase.messaging();
+ 
