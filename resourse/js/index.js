@@ -10,9 +10,13 @@ jQuery(document).ready(function() {
     console.log( "ready!" );
 });
 
-jQuery('#notify').on('click', () =>{
+jQuery('#notify').on('touchstart click', (event) =>{
+    event.preventDefault();
     askForPermissioToReceiveNotifications();
+    alert('token generado');
 });
+
+
 
 initializeFirebase();
 
