@@ -8,16 +8,14 @@ import { initializeFirebase, askForPermissioToReceiveNotifications } from './pus
 
 jQuery(document).ready(function() {
     console.log( "ready!" );
+    if (!("Notification" in window)) {
+        alert("This browser does not support desktop notification");
+      }
 });
 
 jQuery('#notify').on('touchstart click', (event) =>{
     event.preventDefault();
-   let tokengen = askForPermissioToReceiveNotifications().then(res => {
-    alert(res);
-    $('#token').html('');
-    $('#token').html(token);
-   });
-    
+    askForPermissioToReceiveNotifications();
 });
 
 
