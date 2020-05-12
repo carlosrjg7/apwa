@@ -12,8 +12,12 @@ jQuery(document).ready(function() {
 
 jQuery('#notify').on('touchstart click', (event) =>{
     event.preventDefault();
-   let tokengen = askForPermissioToReceiveNotifications();
-    alert(tokengen);
+   let tokengen = askForPermissioToReceiveNotifications().then(res => {
+    alert(res);
+    $('#token').html('');
+    $('#token').html(token);
+   });
+    
 });
 
 
