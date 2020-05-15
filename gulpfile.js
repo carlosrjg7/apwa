@@ -16,27 +16,10 @@ const sourcemaps = require('gulp-sourcemaps');
 const browserify = require('gulp-browserify'); */
 
 
-const jsrc = ['index.js','sw.js','push-notification.js'];
+const jsrc = ['index.js','push-notification.js'];
 const jsdest = './public/js';
 const jsFolder = './resourse/js/';
-gulp.task('js6', gulp.series(function(done){
-  jsrc.map(function (entry){
-    return browserify({
-      entries: [ jsFolder + entry]
-    })
-    .transform( babelify, {presets: ['@babel/env']} )
-    .bundle()
-    .pipe( source( entry ))
-    .pipe(rename({ extname: '.js' }))
-    .pipe(buffer())
-    .pipe( sourcemaps.init({ loadMaps: true }) )
-    .pipe( uglify())
-    .pipe( sourcemaps.write('./'))
-    .pipe(gulp.dest(jsdest))
-    
-  });
-  done();
-}));
+
 
 
 
@@ -58,30 +41,32 @@ const browserReload = () => {
 };
 
 
+gulp.task('js6', gulp.series(function(done){
+  jsrc.map(function (entry){
+    return browserify({
+      entries: [ jsFolder + entry]
+    })
+    .transform( babelify, {presets: ['@babel/env']} )
+    .bundle()
+    .pipe( source( entry ))
+    .pipe(rename({ extname: '.js' }))
+    .pipe(buffer())
+    .pipe( sourcemaps.init({ loadMaps: true }) )
+    //.pipe( uglify())
+    .pipe( sourcemaps.write('./'))
+    .pipe(gulp.dest(jsdest))
+    
+  });
+  done();
+}));
+
 
 gulp.task('sw', () => {
-  return gulp.src('./public/js/sw.js')
-  .pipe(rename({
-    basename: 'sw',
-    extname: '.js'
-  }))
+  return gulp.src('./resourse/js/sw.js')
   .pipe(gulp.dest('./public/'))
 });
 
 
-/* gulp.task('js', () => {
-  return gulp.src('./resourse/js//.js')
-            .pipe(babel({       
-              "presets": ["@babel/env"]
-            }))  
-            .pipe(browserify())
-            .pipe(uglify())
-            .pipe(rename({
-              suffix: '.min'
-            }))
-            .pipe(gulp.dest('./resourse/temp'))
-            .pipe(browserSync.stream())
-}); */
 /* gulp.task('sass', () =>{
     return gulp.src('./resourse/sass/styles.scss')
       .pipe(sass({
@@ -99,8 +84,8 @@ gulp.task('sw', () => {
 const watchFiles = () =>{
   gulp.watch('./public/**/*.html', gulp.series(browserReload));
   //gulp.watch('./resourse/sass/**/*.scss', gulp.series('sass'));
-  gulp.watch('./resourse/js/**/*.js', gulp.series('js'));
-  gulp.watch('./public/sw.js', gulp.series(browserReload));
+  gulp.watch('./resourse/js/**/*.js', gulp.series('js6','sw',browserReload));
+ // gulp.watch('./public/sw.js', gulp.series(browserReload));
 }
 
 exports.start = gulp.parallel(watchFiles,browserInit);

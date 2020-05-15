@@ -3,7 +3,14 @@ import $ from "jquery";
 window.$ = $;
 window.jQuery = $;
 
-import { initializeFirebase, askForPermissioToReceiveNotifications } from './push-notification';
+//import firebase from 'firebase';
+
+import { initializeFirebase, subscribeToNotifications, unSubscribe } from './push-notification';
+
+//import './push-notification';
+
+
+initializeFirebase();
 
 
 jQuery(document).ready(function() {
@@ -11,14 +18,25 @@ jQuery(document).ready(function() {
     if (!("Notification" in window)) {
         alert("This browser does not support desktop notification");
       }
+
+     if(Notification.permission === 'denied'){
+         console.log('las notificaciones estan bloqueadas..');
+     }
 });
 
-jQuery('#notify').on('touchstart click', (event) =>{
+
+
+jQuery('#notify_active').on('touchstart click', (event) =>{
     event.preventDefault();
-    askForPermissioToReceiveNotifications();
+    console.log('click suscrip');
+    subscribeToNotifications();
+    jQuery(this).css('display', 'none');
 });
 
 
-
-initializeFirebase();
-
+jQuery('#notify_inactive').on('touchstart click', (event) =>{
+    event.preventDefault();
+    console.log('click Unsuscrip');
+    unSubscribe();
+    jQuery(this).css('display','none');
+});
