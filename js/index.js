@@ -64655,8 +64655,6 @@ var _jquery = _interopRequireDefault(require("jquery"));
 
 var _pushNotification = require("./push-notification");
 
-var _this = void 0;
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 window.$ = _jquery["default"];
@@ -64668,7 +64666,8 @@ jQuery(document).ready(function () {
   console.log("ready!");
 
   if (!("Notification" in window)) {
-    alert("This browser does not support desktop notification");
+    console.log('Este equipo no soporta notificaciones push web');
+    jQuery('.section_button').addClass('hide');
   }
 
   if (Notification.permission === 'denied') {
@@ -64679,14 +64678,13 @@ jQuery('#notify_active').on('touchstart click', function (event) {
   event.preventDefault();
   console.log('click suscrip');
   (0, _pushNotification.subscribeToNotifications)();
-  jQuery(_this).css('display', 'none');
 });
-jQuery('#notify_inactive').on('touchstart click', function (event) {
-  event.preventDefault();
-  console.log('click Unsuscrip');
-  (0, _pushNotification.unSubscribe)();
-  jQuery(_this).css('display', 'none');
-});
+/* jQuery('#notify_inactive').on('touchstart click', (event) =>{
+    event.preventDefault();
+    console.log('click Unsuscrip');
+    unSubscribe();
+    jQuery(this).css('display','none');
+}); */
 
 },{"./push-notification":329,"@babel/polyfill":1,"jquery":324}],329:[function(require,module,exports){
 "use strict";
@@ -64757,12 +64755,16 @@ var initializeFirebase = function initializeFirebase() {
 exports.initializeFirebase = initializeFirebase;
 
 function verificaSuscripcion(activadas) {
-  if (activadas) {
-    jQuery('#notify_active').css('display', 'none');
-    jQuery('#notify_inactive').css('display', 'block');
+  var btnActivate = jQuery('.section_button');
+  var store = window.localStorage.getItem('sentToServer');
+
+  if (activadas && store === '1') {
+    btnActivate.removeClass('show');
+    btnActivate.addClass('hide');
   } else {
-    jQuery('#notify_active').css('display', 'block');
-    jQuery('#notify_inactive').css('display', 'none');
+    console.log('no hay suscrip');
+    btnActivate.addClass('show');
+    btnActivate.removeClass('hide');
     setTokenSentToServer(false);
     window.localStorage.removeItem('pushToken');
   }
@@ -64807,12 +64809,18 @@ var setTokenSentToServer = function setTokenSentToServer(sent) {
 
 
 var sendTokenToServer = function sendTokenToServer(token) {
+  var btnActivate = jQuery('.section_button');
+
   if (!isTokenSentToServer()) {
     setTokenSentToServer(true);
     addTokenToFirebaseBD(token);
     console.log('Send token to server');
+    btnActivate.removeClass('show');
+    btnActivate.addClass('hide');
   } else {
     console.log('El token ya existe en el server');
+    btnActivate.removeClass('show');
+    btnActivate.addClass('hide');
   }
 };
 

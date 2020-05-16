@@ -46639,12 +46639,16 @@ var initializeFirebase = function initializeFirebase() {
 exports.initializeFirebase = initializeFirebase;
 
 function verificaSuscripcion(activadas) {
-  if (activadas) {
-    jQuery('#notify_active').css('display', 'none');
-    jQuery('#notify_inactive').css('display', 'block');
+  var btnActivate = jQuery('.section_button');
+  var store = window.localStorage.getItem('sentToServer');
+
+  if (activadas && store === '1') {
+    btnActivate.removeClass('show');
+    btnActivate.addClass('hide');
   } else {
-    jQuery('#notify_active').css('display', 'block');
-    jQuery('#notify_inactive').css('display', 'none');
+    console.log('no hay suscrip');
+    btnActivate.addClass('show');
+    btnActivate.removeClass('hide');
     setTokenSentToServer(false);
     window.localStorage.removeItem('pushToken');
   }
@@ -46689,12 +46693,18 @@ var setTokenSentToServer = function setTokenSentToServer(sent) {
 
 
 var sendTokenToServer = function sendTokenToServer(token) {
+  var btnActivate = jQuery('.section_button');
+
   if (!isTokenSentToServer()) {
     setTokenSentToServer(true);
     addTokenToFirebaseBD(token);
     console.log('Send token to server');
+    btnActivate.removeClass('show');
+    btnActivate.addClass('hide');
   } else {
     console.log('El token ya existe en el server');
+    btnActivate.removeClass('show');
+    btnActivate.addClass('hide');
   }
 };
 
