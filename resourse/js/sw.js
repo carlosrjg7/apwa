@@ -14,8 +14,8 @@ var firebaseConfig = {
     measurementId: "G-R3CJPXBC55"
 };
 
-const STATIC_CACHE = 'static-v2.1';
-const DYNAMIC_CACHE = 'dynamic-v2.1';
+const STATIC_CACHE = 'static-v2.2';
+const DYNAMIC_CACHE = 'dynamic-v2.2';
 //const INMUTABLE_CACHE = 'inmutable-v1';
 
 const APP_SHELL = [

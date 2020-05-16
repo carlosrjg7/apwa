@@ -16,7 +16,8 @@ initializeFirebase();
 jQuery(document).ready(function() {
     console.log( "ready!" );
     if (!("Notification" in window)) {
-        alert("This browser does not support desktop notification");
+        console.log('Este equipo no soporta notificaciones push web');
+        jQuery('.section_button').addClass('hide');
       }
 
      if(Notification.permission === 'denied'){
@@ -30,13 +31,12 @@ jQuery('#notify_active').on('touchstart click', (event) =>{
     event.preventDefault();
     console.log('click suscrip');
     subscribeToNotifications();
-    jQuery(this).css('display', 'none');
 });
 
 
-jQuery('#notify_inactive').on('touchstart click', (event) =>{
+/* jQuery('#notify_inactive').on('touchstart click', (event) =>{
     event.preventDefault();
     console.log('click Unsuscrip');
     unSubscribe();
     jQuery(this).css('display','none');
-});
+}); */

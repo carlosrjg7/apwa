@@ -7,6 +7,8 @@ let FIREBASE_AUTH;
 let FIREBASE_MESSAGING;
 let FIREBASE_DATABASE; 
 
+
+
 const firebaseConfig = {
   apiKey: "AIzaSyAwWArnTnyHGSrGBr3Oby7WwS8oflag784",
   authDomain: "pwat-d6956.firebaseapp.com",
@@ -64,12 +66,18 @@ export const initializeFirebase = () => {
 
 
 function verificaSuscripcion(activadas){
-  if(activadas){
-    jQuery('#notify_active').css('display','none');
-    jQuery('#notify_inactive').css('display','block');
+    const btnActivate = jQuery('.section_button');
+    let store = window.localStorage.getItem('sentToServer');
+  if(activadas && store ==='1'){
+
+    btnActivate.removeClass('show');
+    btnActivate.addClass('hide');
+
   }else{
-    jQuery('#notify_active').css('display','block');
-    jQuery('#notify_inactive').css('display','none');
+    console.log('no hay suscrip');
+    btnActivate.addClass('show');
+    btnActivate.removeClass('hide');
+
     setTokenSentToServer(false);
     window.localStorage.removeItem('pushToken');
   }
@@ -99,12 +107,19 @@ const setTokenSentToServer = (sent) => {
 
 //funcion para almacenar los tokens en localStorage
 const sendTokenToServer = (token) =>{
+
+  const btnActivate = jQuery('.section_button');
+
     if(!isTokenSentToServer()){
       setTokenSentToServer(true);
       addTokenToFirebaseBD(token);
       console.log('Send token to server');
+      btnActivate.removeClass('show');
+      btnActivate.addClass('hide');
     }else{
       console.log('El token ya existe en el server');
+      btnActivate.removeClass('show');
+      btnActivate.addClass('hide');
     }
 };
 
