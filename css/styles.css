@@ -4,3 +4,13 @@ body{
     padding: 0px;
     -webkit-overflow-scrolling:touch;
 }
+
+.boton-active-notify{
+    background-color: #F12D18;
+    padding: 0.3em;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
+    border: 0px;
+}
